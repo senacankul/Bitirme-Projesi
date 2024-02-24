@@ -1,4 +1,3 @@
-```
 # Bursa Büyükşehir Belediyesi Kurumları Randevu Servisi
 
 Bu proje, Bursa Büyükşehir Belediyesi kurumları için bir randevu servisi uygulamasını geliştirmektedir. Bu servis, vatandaşların çeşitli hizmetler için randevu almasını ve yönetmesini sağlar.
