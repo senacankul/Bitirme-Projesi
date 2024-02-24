@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { organizationList } from '../data/organizations';
 
 const Home = () => {
   const [organizations, setOrganizations] = useState([]);
@@ -10,83 +11,11 @@ const Home = () => {
     fetchOrganizations();
   }, []);
 
-  const data = {
-    "help": "https://acikyesil.bursa.bel.tr/api/3/action/help_show?name=datastore_search",
-    "success": true,
-    "result": {
-      "include_total": true,
-      "limit": 5,
-      "records_format": "objects",
-      "resource_id": "1b8c32eb-d586-4d5c-ad6c-ebcb9e856496",
-      "total_estimation_threshold": null,
-      "records": [
-        {
-          "_id": 1,
-          "gml_id": "bursa_resmikurumlar.1",
-          "ust_katego": "RESMİ KURUMLAR",
-          "alt_katego": "İLÇE MÜDÜRLÜKLERİ",
-          "ad": "ORHANELİ İLÇE SAĞLIK MÜDÜRLÜĞÜ",
-          "geojson": "{\"type\":\"Point\",\"coordinates\":[28.986516686,39.902503315]}"
-        },
-        {
-          "_id": 2,
-          "gml_id": "bursa_resmikurumlar.2",
-          "ust_katego": "RESMİ KURUMLAR",
-          "alt_katego": "İLÇE MÜDÜRLÜKLERİ",
-          "ad": "ORHANGAZİ İLÇE SAĞLIK MÜDÜRLÜĞÜ",
-          "geojson": "{\"type\":\"Point\",\"coordinates\":[29.303493892,40.498039678]}"
-        },
-        {
-          "_id": 3,
-          "gml_id": "bursa_resmikurumlar.3",
-          "ust_katego": "RESMİ KURUMLAR",
-          "alt_katego": "İLÇE MÜDÜRLÜKLERİ",
-          "ad": "OSMANGAZİ İLÇE SAĞLIK MÜDÜRLÜĞÜ",
-          "geojson": "{\"type\":\"Point\",\"coordinates\":[29.013030988,40.202824709]}"
-        },
-        {
-          "_id": 4,
-          "gml_id": "bursa_resmikurumlar.4",
-          "ust_katego": "RESMİ KURUMLAR",
-          "alt_katego": "POSTANE",
-          "ad": "PTT ULUCAMİ MERKEZ MÜDÜRLÜĞÜ",
-          "geojson": "{\"type\":\"Point\",\"coordinates\":[29.062187819,40.184345284]}"
-        },
-        {
-          "_id": 5,
-          "gml_id": "bursa_resmikurumlar.5",
-          "ust_katego": "RESMİ KURUMLAR",
-          "alt_katego": "POSTANE",
-          "ad": "PTT GEMLİK MERKEZ MÜDÜRLÜĞÜ",
-          "geojson": "{\"type\":\"Point\",\"coordinates\":[29.154967535,40.431925251]}"
-        }
-      ],
-      "fields": [
-        { "id": "_id", "type": "int" },
-        { "id": "gml_id", "type": "text" },
-        { "id": "ust_katego", "type": "text" },
-        { "id": "alt_katego", "type": "text" },
-        { "id": "ad", "type": "text" },
-        { "id": "geojson", "type": "text" }
-      ],
-      "_links": {
-        "start": "/api/3/action/datastore_search?resource_id=1b8c32eb-d586-4d5c-ad6c-ebcb9e856496&limit=5",
-        "next": "/api/3/action/datastore_search?resource_id=1b8c32eb-d586-4d5c-ad6c-ebcb9e856496&limit=5&offset=5"
-      },
-      "total": 342,
-      "total_was_estimated": false
-    }
-  };
-  
-  
   const fetchOrganizations = async () => {
     try {
     //  const response = await fetch('https://acikyesil.bursa.bel.tr/api/3/action/datastore_search?resource_id=1b8c32eb-d586-4d5c-ad6c-ebcb9e856496&limit=5');
     //  const data = await response.json();
-      const names = data.result.records.map(record => ({
-        name: record.ad
-      }));
-      setOrganizations(names);
+      setOrganizations(organizationList);
     } catch (error) {
       console.error('Error fetching organizations:', error);
     }
@@ -112,7 +41,7 @@ const Home = () => {
     <div className="container mx-auto">
       <h1 className="text-3xl text-center my-8">Bursa Büyükşehir Belediyesi Kamu Kurumları İçin Randevu Oluşturma Sistemi</h1>
       <p>Bursa Büyükşehir Belediyesi, Bursa ilinin yerel yönetimi ve hizmetlerini sağlayan kuruluştur. Akıllı Şehircilik kapsamında da faaliyetlerini sürdürmektedir. Devlet kurumlarında sıra beklemeden randevu oluşturabilirsiniz.</p>
- <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Randevu Sistemi</h1>
       <form onSubmit={handleSubmit} className="mb-4">
       <label className="block mb-2" htmlFor="organization">Kurum:</label>
@@ -124,7 +53,7 @@ const Home = () => {
       >
         <option value="" disabled>Kurum seçiniz</option>
         {organizations.map((org, index) => (
-          <option key={index} value={org.name}>{org.name}</option>
+          <option key={index} value={org}>{org}</option>
         ))}
       </select>
       <label className="block mt-4 mb-2" htmlFor="dateHour">Tarih:</label>
@@ -155,7 +84,6 @@ const Home = () => {
         )}
       </div>
     </div>
-      
     </div>
   );
 };
