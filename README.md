@@ -9,7 +9,7 @@ Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin:
 1. Bu depoyu klonlayın:
 
 ```bash
-git clone <repository_url>
+git clone https://github.com/senacankul/Bitirme-Projesi
 ```
 
 2. Proje dizinine gidin:
@@ -50,4 +50,3 @@ Katkıda bulunmak için lütfen aşağıdaki adımları izleyin:
 ## Lisans
 
 Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için `LICENSE` dosyasına bakın.
-```
