@@ -1,13 +1,6 @@
-{
-    "rewrites":  [
-      {
-        "source": "/(.*)",
-        "destination": "/"
-      },
-      {
-        "source": "/api/(.*)",
-        "destination": "/api"
-      }
-    ]
-  }
-  
+{ "routes": 
+[{ "src": "/[^.]+", "dest": "/", "status": 200 },
+{ "source": "/api", "destination": "https://acikyesil.bursa.bel.tr/api/3/action/datastore_search?resource_id=1b8c32eb-d586-4d5c-ad6c-ebcb9e856496" }
+
+
+] }
