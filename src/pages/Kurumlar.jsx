@@ -24,7 +24,7 @@ const Kurumlar = () => {
 useEffect(() => {
     const fetchData = async () => {
         try {
-          const response = await fetch('/api');
+          const response = await fetch('/api/data');
           const data = await response.json(); 
           const organizationList = data.result.records.map(record => record.ad);
           setOrganizations(organizationList);
