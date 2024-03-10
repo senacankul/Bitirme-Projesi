@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { organizationList } from '../data/organizations';
 
 const Home = () => {
   const [organizations, setOrganizations] = useState([]);
@@ -13,8 +12,9 @@ const Home = () => {
 
   const fetchOrganizations = async () => {
     try {
-    //  const response = await fetch('https://acikyesil.bursa.bel.tr/api/3/action/datastore_search?resource_id=1b8c32eb-d586-4d5c-ad6c-ebcb9e856496&limit=5');
-    //  const data = await response.json();
+      const response = await fetch('https://acikyesil.bursa.bel.tr/api/3/action/datastore_search?resource_id=1b8c32eb-d586-4d5c-ad6c-ebcb9e856496&limit=5');
+      const data = await response.json(); 
+      const organizationList = data.result.records.map(record => record.ad);
       setOrganizations(organizationList);
     } catch (error) {
       console.error('Error fetching organizations:', error);
