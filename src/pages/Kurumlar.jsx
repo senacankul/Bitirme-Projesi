@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { organizationList } from '../data/organizations';
+import React, { useEffect, useState } from 'react';
 
 const ListItem = ({ item }) => {
   return (
@@ -20,19 +19,15 @@ const List = ({ items }) => {
 };
 
 const Kurumlar = () => {
+  const [organizations, setOrganizations] = useState([]);
+
 useEffect(() => {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const apiUrl = 'https://acikyesil.bursa.bel.tr/api/3/action/datastore_search';
-    
     const fetchData = async () => {
         try {
-        const response = await fetch(proxyUrl + apiUrl, {
-            headers: {
-            'Origin': 'http://localhost:5173',
-            'X-Requested-With': 'XMLHttpRequest'
-            }
-        });
-        const data = await response.json();
+          const response = await fetch('/api');
+          const data = await response.json(); 
+          const organizationList = data.result.records.map(record => record.ad);
+          setOrganizations(organizationList);
         } catch (error) {
         console.error('Error fetching data:', error);
         }
@@ -45,7 +40,7 @@ useEffect(() => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Kurumlar</h1>
-      <List items={organizationList} />
+      <List items={organizations} />
     </div>
   );
 };

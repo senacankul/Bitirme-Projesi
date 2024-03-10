@@ -7,45 +7,12 @@ const Home = () => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    // fetchOrganizations();
-    fetchData();
-
+    fetchOrganizations();
   }, []);
-
-
-  const fetchData = () => {
-    var data = {
-      resource_id: '', // the resource id
-      limit: 5, // get 5 results
-      q: 'jones' // query for 'jones'
-    };
-  
-    // Construct URL with query parameters
-    const url = new URL('https://acikyesil.bursa.bel.tr/api/3/action/datastore_search?resource_id=1b8c32eb-d586-4d5c-ad6c-ebcb9e856496&limit=5');
-    Object.keys(data).forEach(key => url.searchParams.append(key, data[key]));
-  
-    // Fetch data
-    fetch(url, {
-      headers: {
-        'Origin': 'https://bitirme-projesi-iota.vercel.app', // Replace with your frontend URL
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Extract the "ad" values from the response
-        const ads = data.result.records.map(record => record.ad);
-        setAdList(ads);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  };
-  
 
   const fetchOrganizations = async () => {
     try {
-      const response = await fetch('https://acikyesil.bursa.bel.tr/api/3/action/datastore_search?resource_id=1b8c32eb-d586-4d5c-ad6c-ebcb9e856496&limit=5');
+      const response = await fetch('/api');
       const data = await response.json(); 
       const organizationList = data.result.records.map(record => record.ad);
       setOrganizations(organizationList);
